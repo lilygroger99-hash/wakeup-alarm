@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Original alarm-clock artwork: two bells, a round body with a dark face, hands and little legs.
+     All artwork stays inside the 66x66dp adaptive-icon safe zone (centered in the 108x108 canvas). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Bells -->
+    <path
+        android:fillColor="#FFB74D"
+        android:pathData="M28,38 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0" />
+    <path
+        android:fillColor="#FFB74D"
+        android:pathData="M64,38 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0" />
+
+    <!-- Legs -->
+    <path
+        android:pathData="M42,77 L37,86 M66,77 L71,86"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"
+        android:strokeWidth="3.5" />
+
+    <!-- Body rim -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M32,58 a22,22 0 1,0 44,0 a22,22 0 1,0 -44,0" />
+    <!-- Face -->
+    <path
+        android:fillColor="#2B3A7A"
+        android:pathData="M36,58 a18,18 0 1,0 36,0 a18,18 0 1,0 -36,0" />
+
+    <!-- Hands -->
+    <path
+        android:pathData="M54,58 L54,46 M54,58 L62,63"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="3.5" />
+</vector>

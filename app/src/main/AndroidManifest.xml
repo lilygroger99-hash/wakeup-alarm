@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Alarm UI + foreground ringing notification (runtime permission on Android 13+). -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!--
+        Exact alarms.
+        - Android 13+ (API 33+): USE_EXACT_ALARM is granted at install time and is intended for alarm-clock / calendar
+          apps. Google Play requires a declaration for it (see PLAY_STORE_CHECKLIST.md).
+        - Android 12/12L (API 31-32): USE_EXACT_ALARM does not exist, so SCHEDULE_EXACT_ALARM is declared for those
+          versions only. The user may need to grant it in system settings; the app guides them there.
+    -->
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission
+        android:name="android.permission.SCHEDULE_EXACT_ALARM"
+        android:maxSdkVersion="32" />
+
+    <!-- Show the ringing screen over the lock screen (alarm apps are an allowed use case on Android 14+). -->
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+
+    <!-- Re-schedule alarms after a reboot. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- Keep the CPU awake while an alarm is ringing. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- The ringing alarm runs as a short-lived foreground service of type mediaPlayback. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+
+    <application
+        android:name=".WakeUpApp"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.WakeUp">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Full-screen ringing UI. Direct-boot aware so it can show before the first unlock after a reboot. -->
+        <activity
+            android:name=".alarm.RingActivity"
+            android:directBootAware="true"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:showWhenLocked="true"
+            android:taskAffinity=""
+            android:turnScreenOn="true" />
+
+        <service
+            android:name=".alarm.AlarmService"
+            android:directBootAware="true"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
+
+        <!-- Fired by AlarmManager at the alarm time. Not exported: only our own PendingIntents reach it. -->
+        <receiver
+            android:name=".alarm.AlarmReceiver"
+            android:directBootAware="true"
+            android:exported="false" />
+
+        <!-- Notification buttons that don't need an Activity (e.g. "Cancel snooze"). -->
+        <receiver
+            android:name=".alarm.AlarmActionReceiver"
+            android:directBootAware="true"
+            android:exported="false" />
+
+        <!-- Reboot, time/time-zone changes, app update, exact-alarm permission changes: re-schedule everything. -->
+        <receiver
+            android:name=".alarm.SystemEventReceiver"
+            android:directBootAware="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>
