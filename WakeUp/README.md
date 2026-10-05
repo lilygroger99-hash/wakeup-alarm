@@ -108,7 +108,7 @@ Before every update: raise `versionCode` in `app/build.gradle.kts` (it must incr
 - Display name: change `app_name` in `app/src/main/res/values/strings.xml` (everything in the UI reads from it).
 - Store/Gradle name: `rootProject.name` in `settings.gradle.kts`.
 - Package id: `applicationId` in `app/build.gradle.kts`. The Kotlin `namespace` / package folder (`com.wakeup.alarm`) does not have to change; if you want it renamed too, use Android Studio's **Refactor > Rename** on the package so imports and the manifest update together.
-- The launcher icon is vector artwork in `res/drawable/ic_launcher_foreground.xml` with the background colour in `res/values/colors.xml`.
+- The launcher icon is an adaptive icon made of three PNG layers in `res/drawable-nodpi/` (`ic_launcher_bg.png`, `ic_launcher_fg.png`, `ic_launcher_mono.png` for Android 13+ themed icons), wired up in `res/mipmap-anydpi-v26/ic_launcher*.xml`. The About screen shows `about_logo.png`. The 512 × 512 Play Store icon (`wakeup-play-icon-512.png`) is the same artwork as one full square.
 
 ## Test checklist (do this on a real phone)
 

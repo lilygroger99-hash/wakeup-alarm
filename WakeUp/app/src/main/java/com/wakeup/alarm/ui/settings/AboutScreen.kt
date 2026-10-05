@@ -1,7 +1,6 @@
 package com.wakeup.alarm.ui.settings
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -66,14 +65,13 @@ fun AboutScreen(onBack: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            // The launcher artwork on its brand-coloured background.
+            // The full app logo (same artwork as the launcher icon).
             Image(
-                painter = painterResource(R.drawable.ic_launcher_foreground),
+                painter = painterResource(R.drawable.about_logo),
                 contentDescription = stringResource(R.string.about_icon_description, appName),
                 modifier = Modifier
                     .size(112.dp)
-                    .clip(RoundedCornerShape(28.dp))
-                    .background(androidx.compose.ui.graphics.Color(0xFF1E2A5A)),
+                    .clip(RoundedCornerShape(28.dp)),
             )
             Text(text = appName, style = MaterialTheme.typography.headlineMedium)
             Text(

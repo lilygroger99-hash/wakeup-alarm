@@ -36,7 +36,7 @@ Verified against Google's official pages on 2026-10-04. Play rules change, so re
 | App name | up to 30 characters, e.g. "WakeUp: Simple Alarm Clock" |
 | Short description | up to 80 characters, e.g. "A fast, private alarm clock with snooze and repeat days." |
 | Full description | up to 4000 characters; list the features from README; mention it works offline and collects no data |
-| App icon | 512 × 512 px PNG (32-bit, no rounded corners; Play rounds them). Export the launcher artwork from Android Studio: right-click `res` > **New > Image Asset**, or render `ic_launcher_foreground.xml` on the `#1E2A5A` background. |
+| App icon | 512 × 512 px PNG (32-bit, no rounded corners; Play rounds them). Use `wakeup-play-icon-512.png` (full square, no baked-in rounded corners). |
 | Feature graphic | 1024 × 500 px PNG or JPG |
 | Phone screenshots | at least 2 (up to 8). Suggested set: home with alarms, empty state, edit screen, full-screen ringing screen, dark theme, settings |
 | Category | Tools (or Productivity) |
