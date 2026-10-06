@@ -40,7 +40,7 @@ Verified against Google's official pages on 2026-10-04. Play rules change, so re
 | Feature graphic | 1024 × 500 px PNG or JPG |
 | Phone screenshots | at least 2 (up to 8). Suggested set: home with alarms, empty state, edit screen, full-screen ringing screen, dark theme, settings |
 | Category | Tools (or Productivity) |
-| Contact | email address (public), optional website/phone |
+| Contact | email address (public), e.g. pax.official.com@gmail.com, optional website/phone |
 
 Take screenshots on a real device or emulator (Pixel, 1080 × 2400). Don't add device frames that imitate other brands' products, and don't use other apps' UI or any copyrighted material.
 

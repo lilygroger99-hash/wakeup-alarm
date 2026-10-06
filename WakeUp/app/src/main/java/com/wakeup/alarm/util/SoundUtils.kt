@@ -44,6 +44,7 @@ object SoundUtils {
     fun describe(context: Context, uriString: String): SoundInfo {
         if (uriString.isBlank()) return SoundInfo(title = null, missing = false, isDefault = true)
         if (!isAvailable(context, uriString)) return SoundInfo(title = null, missing = true, isDefault = false)
+        CustomSounds.nameOf(context, uriString)?.let { return SoundInfo(title = it, missing = false, isDefault = false) }
         val title = try {
             RingtoneManager.getRingtone(context, uriString.toUri())?.getTitle(context)
         } catch (_: Exception) {

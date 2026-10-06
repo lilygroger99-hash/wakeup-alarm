@@ -3,9 +3,8 @@
 A native Android alarm clock written in Kotlin with Jetpack Compose and Material 3. It works fully offline, has no
 ads, no analytics and no network permission.
 
-> **Status:** the code was written and reviewed by hand but has **not been compiled or run on a device yet**. Open it
-> in Android Studio, let Gradle sync, fix anything the compiler reports, and run through the test checklist below on
-> a real phone before you publish anything.
+> **Status:** the alarm core builds on GitHub Actions and runs on a real phone. The stopwatch and the custom-audio
+> feature were added afterwards: build them, then run the checklist below on a real phone before you publish.
 
 ## Features
 
@@ -15,6 +14,8 @@ ads, no analytics and no network permission.
 - Ringing: looping alarm sound + vibration, full-screen STOP / SNOOZE screen over the lock screen, notification with the same buttons
 - Snooze (1, 5, 10, 15, 20, 30 minutes) with a "snoozed until" state and a "Cancel snooze" notification button
 - Reboot, time-change, time-zone and app-update recovery, with a "Missed alarm" notification for alarms that were due while the phone was off
+- Stopwatch with laps (keeps running while you leave the screen)
+- Your own alarm sounds: add an audio file from your phone (copied into the app, up to 20 files of 20 MB), pick it for any alarm, delete it again at any time
 - Settings (theme, dynamic colors, time format, defaults for new alarms, permission status), About screen, privacy policy link
 - Light, dark and system themes; TalkBack labels, 48dp touch targets, font scaling
 
@@ -121,4 +122,6 @@ Before every update: raise `versionCode` in `app/build.gradle.kts` (it must incr
 7. Deny notification permission: the sound and vibration still work and the banner explains what is limited.
 8. Pick a custom sound, then delete or disable it (or use an SD-card sound and remove the card): the default sound plays instead.
 9. Switch Settings > Theme between System, Light and Dark; turn on TalkBack and swipe through an alarm card and the edit screen; set system font size to the largest.
-10. Turn on Do Not Disturb (alarms allowed): the alarm still rings. Put the phone in battery saver and leave it idle for an hour before an alarm.
+10. Custom audio: in an alarm tap Sound > Add your own audio, pick an mp3/m4a, save, and let it ring. Then delete it in the same chooser: the alarm must fall back to the default sound.
+11. Stopwatch (clock icon on the home screen): start, lap, pause, leave the screen and come back, rotate the phone, reset.
+12. Turn on Do Not Disturb (alarms allowed): the alarm still rings. Put the phone in battery saver and leave it idle for an hour before an alarm.

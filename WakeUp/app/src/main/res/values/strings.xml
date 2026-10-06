@@ -136,6 +136,32 @@
     <string name="about_title">About</string>
     <string name="about_description">%1$s is a simple, fast and private alarm clock. It works completely offline and does not collect any personal data.</string>
     <string name="about_developer_label">Developer</string>
-    <string name="about_developer_value">Your name or company (placeholder)</string>
+    <string name="about_developer_value" translatable="false">Pax</string>
+    <string name="about_contact_label">Contact</string>
+    <string name="about_contact_value" translatable="false">pax.official.com@gmail.com</string>
     <string name="about_icon_description">%1$s app icon</string>
+
+    <!-- Custom sounds -->
+    <string name="sound_chooser_system">Phone\'s alarm sounds</string>
+    <string name="sound_chooser_add">Add your own audio</string>
+    <string name="sound_chooser_mine">Your audio</string>
+    <string name="sound_added">\"%1$s\" added</string>
+    <string name="sound_too_big">This file is too big. The limit is %1$d MB.</string>
+    <string name="sound_too_many">You can keep up to %1$d of your own sounds. Delete one first.</string>
+    <string name="sound_unusable">This file could not be used as an alarm sound.</string>
+    <string name="sound_delete_title">Delete this audio?</string>
+    <string name="sound_delete_message">\"%1$s\" will be removed from the app. Alarms that use it will play the default alarm sound instead.</string>
+    <string name="sound_delete_cd">Delete %1$s</string>
+
+    <!-- Stopwatch -->
+    <string name="home_stopwatch">Stopwatch</string>
+    <string name="stopwatch_title">Stopwatch</string>
+    <string name="stopwatch_start">Start</string>
+    <string name="stopwatch_pause">Pause</string>
+    <string name="stopwatch_resume">Resume</string>
+    <string name="stopwatch_lap">Lap</string>
+    <string name="stopwatch_reset">Reset</string>
+    <string name="stopwatch_lap_number">Lap %1$d</string>
+    <string name="stopwatch_lap_time">Lap time</string>
+    <string name="stopwatch_total">Total</string>
 </resources>

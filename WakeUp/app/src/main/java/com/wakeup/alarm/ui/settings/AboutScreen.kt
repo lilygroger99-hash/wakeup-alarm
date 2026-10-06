@@ -1,5 +1,9 @@
 package com.wakeup.alarm.ui.settings
 
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -31,6 +35,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import com.wakeup.alarm.R
 import com.wakeup.alarm.ui.common.Formatters
 import com.wakeup.alarm.ui.common.RowDivider
@@ -93,6 +98,12 @@ fun AboutScreen(onBack: () -> Unit) {
                 )
                 RowDivider()
                 SettingsRow(
+                    title = stringResource(R.string.about_contact_label),
+                    summary = stringResource(R.string.about_contact_value),
+                    onClick = { openEmail(context, context.getString(R.string.about_contact_value)) },
+                )
+                RowDivider()
+                SettingsRow(
                     title = stringResource(R.string.settings_version),
                     summary = Formatters.appVersionName(context),
                 )
@@ -106,5 +117,13 @@ fun AboutScreen(onBack: () -> Unit) {
                 Text(stringResource(R.string.settings_privacy))
             }
         }
+    }
+}
+
+private fun openEmail(context: Context, address: String) {
+    try {
+        context.startActivity(Intent(Intent.ACTION_SENDTO, "mailto:$address".toUri()))
+    } catch (_: ActivityNotFoundException) {
+        Toast.makeText(context, R.string.settings_open_failed, Toast.LENGTH_SHORT).show()
     }
 }

@@ -11,11 +11,13 @@ import com.wakeup.alarm.ui.edit.EditAlarmScreen
 import com.wakeup.alarm.ui.home.HomeScreen
 import com.wakeup.alarm.ui.settings.AboutScreen
 import com.wakeup.alarm.ui.settings.SettingsScreen
+import com.wakeup.alarm.ui.stopwatch.StopwatchScreen
 
 private object Routes {
     const val HOME = "home"
     const val SETTINGS = "settings"
     const val ABOUT = "about"
+    const val STOPWATCH = "stopwatch"
     const val ARG_ALARM_ID = "alarmId"
     const val EDIT = "edit/{$ARG_ALARM_ID}"
 
@@ -32,7 +34,11 @@ fun WakeUpNavHost(modifier: Modifier = Modifier) {
                 onAddAlarm = { navController.navigate(Routes.edit(0L)) },
                 onEditAlarm = { id -> navController.navigate(Routes.edit(id)) },
                 onOpenSettings = { navController.navigate(Routes.SETTINGS) },
+                onOpenStopwatch = { navController.navigate(Routes.STOPWATCH) },
             )
+        }
+        composable(Routes.STOPWATCH) {
+            StopwatchScreen(onBack = { navController.popBackStack() })
         }
         composable(
             route = Routes.EDIT,

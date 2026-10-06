@@ -44,6 +44,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
@@ -68,6 +69,7 @@ fun HomeScreen(
     onAddAlarm: () -> Unit,
     onEditAlarm: (Long) -> Unit,
     onOpenSettings: () -> Unit,
+    onOpenStopwatch: () -> Unit,
 ) {
     val viewModel = containerViewModel("home") { HomeViewModel(it.alarmRepository, it.settingsRepository) }
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -108,7 +110,7 @@ fun HomeScreen(
             ),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            item(key = "header") { Header(onOpenSettings = onOpenSettings) }
+            item(key = "header") { Header(onOpenSettings = onOpenSettings, onOpenStopwatch = onOpenStopwatch) }
 
             item(key = "next") {
                 NextAlarmCard(next = state.next, nowMillis = state.nowMillis, is24Hour = is24Hour)
@@ -166,7 +168,7 @@ fun HomeScreen(
 }
 
 @Composable
-private fun Header(onOpenSettings: () -> Unit) {
+private fun Header(onOpenSettings: () -> Unit, onOpenStopwatch: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -180,6 +182,9 @@ private fun Header(onOpenSettings: () -> Unit) {
                 .weight(1f)
                 .semantics { heading() },
         )
+        IconButton(onClick = onOpenStopwatch, modifier = Modifier.size(48.dp)) {
+            Icon(painterResource(R.drawable.ic_stopwatch), contentDescription = stringResource(R.string.home_stopwatch))
+        }
         IconButton(onClick = onOpenSettings, modifier = Modifier.size(48.dp)) {
             Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.home_settings))
         }

@@ -1,11 +1,11 @@
 # Privacy Policy for WakeUp
 
-*Template. Replace the bracketed parts, host the result on a public web page, and put its URL into
-`privacy_policy_url` in `app/src/main/res/values/strings.xml` and into Play Console. This is not legal advice; have it
-reviewed if you need certainty for your jurisdiction.*
+*Host this text on a public web page, and put its URL into `privacy_policy_url` in
+`app/src/main/res/values/strings.xml` and into Play Console. This is not legal advice; have it reviewed if you need
+certainty for your jurisdiction.*
 
-**Last updated:** [date]
-**Developer:** [your name or company], contact: [email address]
+**Last updated:** 6 October 2026
+**Developer:** Pax, contact: pax.official.com@gmail.com
 
 ## Summary
 
@@ -13,8 +13,8 @@ WakeUp is an alarm clock that works entirely on your device. It does not collect
 
 ## Information the app handles
 
-- **Alarm settings** (times, labels, repeat days, sound, vibration and snooze choices) and **app preferences** (theme,
-  time format, defaults). These are stored only on your device, in the app's private storage. They are never sent
+- **Alarm settings** (times, labels, repeat days, sound, vibration and snooze choices), **app preferences** (theme,
+  time format, defaults) and the **stopwatch** state (elapsed time and laps). These are stored only on your device, in the app's private storage. They are never sent
   anywhere and are deleted when you uninstall the app.
 - WakeUp does not ask for an account, does not read your contacts, location, photos or microphone, and contains no
   advertising or analytics code.
@@ -34,7 +34,9 @@ WakeUp is an alarm clock that works entirely on your device. It does not collect
 
 ## Alarm sounds
 
-When you choose a sound, WakeUp stores only a reference to the sound that Android's own sound picker returns. It does not copy or upload the file.
+When you choose one of your phone's own alarm sounds, WakeUp stores only a reference to the sound that Android's sound picker returns.
+
+If you add your own audio file, WakeUp makes a copy of it in its private storage on your device so it can play it as an alarm. The copy never leaves your device, and it is not shared with anyone. You can delete it at any time in the sound chooser, and uninstalling the app removes all copies. WakeUp does not read any other file on your device.
 
 ## Children
 
@@ -46,4 +48,4 @@ If this policy changes, the new version will be posted at this address with a ne
 
 ## Contact
 
-[your name or company], [email address]
+Pax, pax.official.com@gmail.com

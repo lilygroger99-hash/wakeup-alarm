@@ -9,6 +9,7 @@ import com.wakeup.alarm.alarm.AlarmScheduler
 import com.wakeup.alarm.data.AlarmRepository
 import com.wakeup.alarm.data.local.AlarmDatabase
 import com.wakeup.alarm.data.settings.SettingsRepository
+import com.wakeup.alarm.data.stopwatch.StopwatchController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -39,4 +40,6 @@ class AppContainer(context: Context) {
     }
 
     val settingsRepository: SettingsRepository by lazy { SettingsRepository(settingsDataStore) }
+
+    val stopwatch: StopwatchController by lazy { StopwatchController(appContext) }
 }
