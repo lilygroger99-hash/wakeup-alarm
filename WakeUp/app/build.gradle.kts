@@ -69,9 +69,17 @@ android {
         compose = true
     }
 
+    androidResources {
+        // The app UI is English only. Keep just English strings from the libraries (Compose, Material, AndroidX
+        // ship dozens of translations) to make the app smaller. Add more locales here when you translate the app.
+        localeFilters += listOf("en")
+    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "DebugProbesKt.bin"
+            excludes += "kotlin-tooling-metadata.json"
         }
     }
 

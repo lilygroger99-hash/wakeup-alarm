@@ -52,6 +52,11 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import com.wakeup.alarm.ui.theme.BrandGradient
 import com.wakeup.alarm.R
 import com.wakeup.alarm.domain.model.Alarm
 import com.wakeup.alarm.ui.common.Formatters
@@ -197,11 +202,13 @@ private fun NextAlarmCard(next: NextAlarm?, nowMillis: Long, is24Hour: Boolean) 
     Surface(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(28.dp),
-        color = MaterialTheme.colorScheme.primaryContainer,
-        contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+        color = Color.Transparent,
+        contentColor = Color.White,
     ) {
         Column(
-            modifier = Modifier.padding(horizontal = 24.dp, vertical = 20.dp),
+            modifier = Modifier
+                .background(BrandGradient)
+                .padding(horizontal = 24.dp, vertical = 24.dp),
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
             Text(
@@ -268,6 +275,7 @@ private fun AlarmCard(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(28.dp),
         color = containerColor,
+        border = if (alarm.enabled) BorderStroke(1.dp, colors.primary.copy(alpha = 0.35f)) else null,
     ) {
         Row(
             modifier = Modifier.padding(start = 24.dp, end = 16.dp, top = 16.dp, bottom = 16.dp),
@@ -280,6 +288,7 @@ private fun AlarmCard(
                     Text(
                         text = timeText,
                         style = AlarmTimeTextStyle,
+                        color = if (alarm.enabled) colors.primary else colors.onSurface,
                         maxLines = 1,
                         softWrap = false,
                     )
@@ -340,19 +349,19 @@ private fun EmptyState() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        Surface(
-            shape = CircleShape,
-            color = MaterialTheme.colorScheme.tertiaryContainer,
-            contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
-            modifier = Modifier.size(112.dp),
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .size(112.dp)
+                .clip(CircleShape)
+                .background(BrandGradient),
         ) {
-            Box(contentAlignment = Alignment.Center) {
-                Icon(
-                    imageVector = Icons.Default.Notifications,
-                    contentDescription = null,
-                    modifier = Modifier.size(52.dp),
-                )
-            }
+            Icon(
+                imageVector = Icons.Default.Notifications,
+                contentDescription = null,
+                tint = Color.White,
+                modifier = Modifier.size(52.dp),
+            )
         }
         Spacer(Modifier.height(4.dp))
         Text(

@@ -5,6 +5,7 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,24 +19,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.contentDescription
@@ -46,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import com.wakeup.alarm.R
 import com.wakeup.alarm.domain.model.Alarm
 import com.wakeup.alarm.ui.common.rememberResources
+import com.wakeup.alarm.ui.theme.RingBackground
 import com.wakeup.alarm.ui.theme.RingTimeTextStyle
 import com.wakeup.alarm.util.TimeFormatter
 
@@ -61,14 +60,13 @@ fun RingScreen(
     onSnooze: () -> Unit,
 ) {
     val resources = rememberResources()
-    val colors = MaterialTheme.colorScheme
     val snoozeMinutes = alarm?.snoozeMinutes ?: Alarm.DEFAULT_SNOOZE_MINUTES
     val snoozeText = resources.getQuantityString(R.plurals.duration_minutes, snoozeMinutes, snoozeMinutes)
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Brush.verticalGradient(listOf(colors.primaryContainer, colors.background)))
+            .background(RingBackground)
             .systemBarsPadding(),
     ) {
         Column(
@@ -94,13 +92,13 @@ fun RingScreen(
                         contentDescription = fullTime
                     },
                 ) {
-                    Text(text = time, style = RingTimeTextStyle, color = colors.onBackground, maxLines = 1, softWrap = false)
+                    Text(text = time, style = RingTimeTextStyle, color = Color.White, maxLines = 1, softWrap = false)
                     if (marker.isNotEmpty()) {
                         Spacer(Modifier.width(8.dp))
                         Text(
                             text = marker,
                             style = MaterialTheme.typography.headlineSmall,
-                            color = colors.onBackground,
+                            color = Color.White,
                             modifier = Modifier.padding(bottom = 14.dp),
                         )
                     }
@@ -108,7 +106,7 @@ fun RingScreen(
                 Text(
                     text = alarm.label.ifBlank { stringResource(R.string.ring_default_title) },
                     style = MaterialTheme.typography.headlineSmall,
-                    color = colors.onBackground,
+                    color = Color.White.copy(alpha = 0.9f),
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(top = 8.dp),
                 )
@@ -120,6 +118,10 @@ fun RingScreen(
             FilledTonalButton(
                 onClick = onSnooze,
                 shape = RoundedCornerShape(28.dp),
+                colors = ButtonDefaults.filledTonalButtonColors(
+                    containerColor = Color.White.copy(alpha = 0.16f),
+                    contentColor = Color.White,
+                ),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(76.dp)
@@ -136,8 +138,8 @@ fun RingScreen(
                 onClick = onStop,
                 shape = RoundedCornerShape(28.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = colors.tertiary,
-                    contentColor = colors.onTertiary,
+                    containerColor = Color(0xFFFF4FD0),
+                    contentColor = Color(0xFF3A0030),
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -159,16 +161,12 @@ private fun PulsingBell() {
         animationSpec = infiniteRepeatable(animation = tween(durationMillis = 650), repeatMode = RepeatMode.Reverse),
         label = "bellScale",
     )
-    Surface(
-        shape = CircleShape,
-        color = MaterialTheme.colorScheme.tertiaryContainer,
-        contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+    Image(
+        painter = painterResource(R.drawable.about_logo),
+        contentDescription = null,
         modifier = Modifier
-            .size(104.dp)
-            .scale(scale),
-    ) {
-        Box(contentAlignment = Alignment.Center) {
-            Icon(Icons.Default.Notifications, contentDescription = null, modifier = Modifier.size(52.dp))
-        }
-    }
+            .size(112.dp)
+            .scale(scale)
+            .clip(RoundedCornerShape(28.dp)),
+    )
 }
